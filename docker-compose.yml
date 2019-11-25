@@ -14,7 +14,7 @@ services:
         ports:
             - 3000:3000
         volumes:
-          - ./apps/backend/src:/app/src
+          - ./apps/challenge/src:/app/src
         depends_on:
           - database
 
@@ -24,5 +24,7 @@ services:
         restart: on-failure
         env_file:
             - ./.envs/.db.env
+        ports:
+          - 27017:27017
         volumes:
             - ./volumes/database:/data/db

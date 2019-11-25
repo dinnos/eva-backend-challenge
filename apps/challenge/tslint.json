@@ -12,6 +12,7 @@
     "member-ordering": [false],
     "interface-name": [false],
     "arrow-parens": false,
+    "only-arrow-functions": false,
     "object-literal-sort-keys": false,
     "no-console": false,
     "array-type": false

@@ -4,22 +4,25 @@ services:
     app:
         container_name: app
         build:
-            context: apps/backend/.
+            context: apps/challenge/.
             target: builder
         command: npm run start:dev
         restart: on-failure
         env_file:
-            - .envs/.db.env
+            - ./.envs/.db.env
+            - ./.envs/backend.env
         ports:
             - 3000:3000
         volumes:
           - ./apps/backend/src:/app/src
+        depends_on:
+          - database
 
     database:
         container_name: database
         image: mongo:4.2
         restart: on-failure
         env_file:
-            - .envs/.db.env
+            - ./.envs/.db.env
         volumes:
             - ./volumes/database:/data/db

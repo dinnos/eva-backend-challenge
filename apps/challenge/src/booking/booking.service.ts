@@ -11,6 +11,12 @@ export class BookingService {
   constructor(@InjectModel('Booking') private readonly bookingModel: Model<IBookingDocument>) {}
 
   /**
+   * Make a query to the database with the provided data of the handler
+   * (/booking/consumed-medications) the query are in base of one period (start and end date)
+   * and the consumed medications
+   *
+   * Success: Returns the data queried
+   * Fail: Throws and internal server exception (HTTP Status Code 500)
    *
    * @param filter
    */

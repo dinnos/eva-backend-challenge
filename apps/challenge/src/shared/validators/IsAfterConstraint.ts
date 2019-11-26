@@ -4,6 +4,7 @@ import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface 
 export class IsAfterConstraint implements ValidatorConstraintInterface {
 
   /**
+   * Check if the DTO property decorate with this class is grater than the property received in the args parameter
    *
    * @param propertyValue
    * @param args

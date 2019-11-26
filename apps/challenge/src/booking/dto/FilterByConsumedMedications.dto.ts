@@ -1,4 +1,4 @@
-import { ArrayMinSize, IsArray, IsBoolean, IsDefined, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsBoolean, IsDefined, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { DatePeriodDto } from '../../shared/dto/date-period.dto';
 

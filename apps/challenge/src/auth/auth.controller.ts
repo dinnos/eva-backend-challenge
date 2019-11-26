@@ -10,6 +10,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
   /**
+   * HTTP (POST /auth/login)
+   * if the credentials provide to the validate method of LocalStrategy are
+   * valid return and JWT token (authService)
    *
    * @param user
    */

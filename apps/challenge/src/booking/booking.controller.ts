@@ -12,6 +12,16 @@ export class BookingController {
   constructor(private readonly bookingService: BookingService) { }
 
   /**
+   * HTTP (GET /booking/consumed-medications)
+   * Handler to query the bookings by the consumed medications provided for the Patients
+   *
+   * before enter needs validate the next requirements
+   * Requirements:
+   *  - Check if the user that makes the request is authenticated (provides a valid JWT)
+   *  - Check if the user contains the Role "SCIENCE_DATA"
+   *  - Validates the body of the request with the FilterByConsumedMedicationsDto Class
+   *
+   * If the conditions are covert return and array with the request data
    *
    * @param filterDto
    */

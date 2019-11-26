@@ -17,6 +17,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   /**
+   * If the bearer token it's valid inject an user instance into the request if the user exist in the database otherwise returns
+   * an UnauthorizedException (HTTP Status Code 401)
    *
    * @param payload
    */

@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { IUserDocument } from './schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
-import { IJwtPayload, IJwtResponse } from './interfaces/jwt.interface';
+import { IJwtResponse } from './interfaces/jwt.interface';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +14,7 @@ export class AuthService {
   ) { }
 
   /**
+   * Validate credentials in database
    *
    * @param username
    * @param password
@@ -28,6 +29,11 @@ export class AuthService {
     return user;
   }
 
+  /**
+   * Query to check if exist (database) an user with the provide username
+   *
+   * @param username
+   */
   async findUserByUsername(username: string): Promise<IUserDocument> {
     const user = await this.userModel.findOne({ username });
 
@@ -38,6 +44,11 @@ export class AuthService {
     return user;
   }
 
+  /**
+   * Method that creates a JWT with the data of the signed user
+   *
+   * @param user
+   */
   async login(user: IUserDocument): Promise<IJwtResponse> {
     const { username, roles } = user;
 

@@ -12,6 +12,9 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   /**
+   * Validates a login handler if the request contains the values username and password
+   *
+   * if the values are provide check if the credentials are valid in the database
    *
    * @param username
    * @param password

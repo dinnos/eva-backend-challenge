@@ -7,6 +7,7 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { RolesGuard } from './guards/roles.guard';
 
 const { JWT_SECRET, JWT_EXPIRES } = process.env;
 
@@ -21,7 +22,7 @@ const { JWT_SECRET, JWT_EXPIRES } = process.env;
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
-  exports: [PassportModule]
+  providers: [AuthService, LocalStrategy, JwtStrategy, RolesGuard],
+  exports: [PassportModule, RolesGuard],
 })
 export class AuthModule {}

@@ -1,0 +1,27 @@
+[
+  {
+    "username": "science_data",
+    "password": "science_data",
+    "roles": ["SCIENCE_DATA"]
+  },
+  {
+    "username": "growth",
+    "password": "growth",
+    "roles": ["GROWTH"]
+  },
+  {
+    "username": "customer_care",
+    "password": "customer_care",
+    "roles": ["CUSTOMER_CARE"]
+  },
+  {
+    "username": "customer_care_growth",
+    "password": "customer_care_growth",
+    "roles": ["CUSTOMER_CARE", "GROWTH"]
+  },
+  {
+    "username": "all_roles",
+    "password": "all_roles",
+    "roles": ["CUSTOMER_CARE", "GROWTH", "SCIENCE_DATA"]
+  }
+]

@@ -7,9 +7,10 @@ const {
   MONGO_INITDB_ROOT_USERNAME: MONGO_USER,
   MONGO_INITDB_ROOT_PASSWORD: MONGO_PASSWORD,
   MONGO_URI: MONGO_PATH,
+  MONGO_DBNAME,
 } = process.env;
 
-const MONGO_URI = `mongodb://${ MONGO_USER }:${ MONGO_PASSWORD }@${ MONGO_PATH }`;
+const MONGO_URI = `mongodb://${ MONGO_USER }:${ MONGO_PASSWORD }@${ MONGO_PATH }/${ MONGO_DBNAME }?authSource=admin`;
 
 @Module({
   imports: [

@@ -16,6 +16,16 @@ services:
         volumes:
           - ./apps/challenge/src:/app/src
         depends_on:
+          - db-seeder
+
+    db-seeder:
+        build: apps/seeder
+
+        container_name: db-seeder
+        env_file:
+            - ./.envs/.db.env
+            - ./.envs/backend.env
+        depends_on:
           - database
 
     database:

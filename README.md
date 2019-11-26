@@ -7,14 +7,14 @@ Requirements (software)
 
 Setup
 ```
-docker-compose -f docker-compose.yml -f docker-compose.override.yml -d 
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d 
 cd seeder 
 npm start
 ```
 
 Testing
 ```
-docker-compose -f docker-compose.yml -f docker-compose.test.yml
+docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 ```
 
 Available endpoints

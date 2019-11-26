@@ -1,5 +1,27 @@
 # Eva Backend Challenge
 
+Requirements (software)
+* docker
+* docker-compose
+* node
+
+Setup
+```
+docker-compose -f docker-compose.yml -f docker-compose.override.yml -d 
+cd seeder 
+npm start
+```
+
+Testing
+```
+docker-compose -f docker-compose.yml -f docker-compose.test.yml
+```
+
+Available endpoints
+
+* POST /auth/login
+* GET /bookings/consumed-medications 
+
 Imagine it's your first day at Eva and you are fresh out of the onboarding process.
 You've been assigned to the Backend team that will support the exploration experience at our Eva Centers in shopping malls.
 

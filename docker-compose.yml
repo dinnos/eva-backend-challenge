@@ -6,27 +6,12 @@ services:
         build:
             context: apps/challenge/.
             target: builder
-        command: npm run start:dev
         restart: on-failure
         env_file:
             - ./.envs/.db.env
             - ./.envs/backend.env
-        ports:
-            - 3000:3000
-        volumes:
-          - ./apps/challenge/src:/app/src
         depends_on:
-          - db-seeder
-
-    db-seeder:
-        build: apps/seeder
-
-        container_name: db-seeder
-        env_file:
-            - ./.envs/.db.env
-            - ./.envs/backend.env
-        depends_on:
-          - database
+            - database
 
     database:
         container_name: database
@@ -35,6 +20,6 @@ services:
         env_file:
             - ./.envs/.db.env
         ports:
-          - 27017:27017
+            - 27017:27017
         volumes:
             - ./volumes/database:/data/db

@@ -15,7 +15,8 @@
     "only-arrow-functions": false,
     "object-literal-sort-keys": false,
     "no-console": false,
-    "array-type": false
+    "array-type": false,
+    "no-var-requires": false
   },
   "rulesDirectory": []
 }

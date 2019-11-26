@@ -3,19 +3,18 @@ import { Type } from 'class-transformer';
 import { DatePeriodDto } from '../../shared/dto/date-period.dto';
 
 export class FilterByConsumedMedicationsDto {
-  @IsDefined()
+  @IsDefined({ message: 'period must be defined' })
   @ValidateNested()
   @Type(() => DatePeriodDto)
   period: DatePeriodDto;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: 'clinicName must be a string' })
+  @IsNotEmpty({ message: 'clinicName can\'t be empty' })
   clinicName: string;
 
-  @IsBoolean()
+  @IsBoolean({ message: 'isStrict must be boolean' })
   isStrict: boolean;
 
-  @IsArray()
-  @ArrayMinSize(0)
+  @IsArray({ message: 'consumedMedications must be an array' })
   consumedMedications: string[];
 }

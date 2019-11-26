@@ -1,12 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const collections = require('./utils/seeders-reader.js').collections;
 
-const {
-  MONGO_URI: MONGO_PATH,
-  MONGO_INITDB_ROOT_USERNAME: MONGO_USERNAME,
-  MONGO_INITDB_ROOT_PASSWORD: MONGO_PASS,
-  MONGO_DBNAME
-} = process.env;
+const MONGO_DBNAME = 'eva';
 
 const countDocuments = (db, collectionName, callback) => {
   const collection = db.collection(collectionName);
@@ -16,27 +11,22 @@ const countDocuments = (db, collectionName, callback) => {
 
 const insertDocuments = (db, collectionName, data, callback) => {
   const collection = db.collection(collectionName);
-  collection.count({}, (err, total) => {
-    if (total === 0) {
-      collection.insertMany(data, (err, result) => {
-        err ? callback(err) : callback(result.length);
-      });
-    } else {
-      callback(total);
-    }
+
+  collection.insertMany(data, (err, data) => {
+    err ? callback(0) : callback(data.insertedCount);
   });
 };
 
-MongoClient.connect(`mongodb://${ MONGO_USERNAME }:${ MONGO_PASS }@${ MONGO_PATH }?authSource=admin`,  {
-  poolSize: 5
-}, (err, client) => {
+(async () => {
+  const client = await MongoClient.connect(`mongodb://mongoadmin:mongoadmin@localhost:27017?authSource=admin`);
+
   for (const collection in collections) {
     const db = client.db(MONGO_DBNAME);
 
     countDocuments(db, collection, (total) => {
-      if (total === 0) {
+      if (!total) {
         insertDocuments(db, collection, collections[collection], inserted => console.log(inserted));
       }
     });
   }
-});
+})();

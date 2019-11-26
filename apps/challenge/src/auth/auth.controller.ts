@@ -9,6 +9,10 @@ export class AuthController {
 
   constructor(private readonly authService: AuthService) { }
 
+  /**
+   *
+   * @param user
+   */
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@User() user: IUserDocument) {

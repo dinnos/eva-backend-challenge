@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -10,6 +10,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 
 const { JWT_SECRET, JWT_EXPIRES } = process.env;
 
+@Global()
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
@@ -21,5 +22,6 @@ const { JWT_SECRET, JWT_EXPIRES } = process.env;
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
+  exports: [PassportModule]
 })
 export class AuthModule {}

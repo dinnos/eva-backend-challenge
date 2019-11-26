@@ -1,5 +1,13 @@
 import { Document, Schema } from 'mongoose';
 
+interface IBookingDocument extends Document {
+  name: string;
+  email: string;
+  datetime: Date;
+  clinicName: string;
+  consumedMedications: string[];
+}
+
 const BookingSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
@@ -15,13 +23,5 @@ BookingSchema.pre<IBookingDocument>('save', function(next) {
 
   next();
 });
-
-interface IBookingDocument extends Document {
-  name: string;
-  email: string;
-  datetime: Date;
-  clinicName: string;
-  consumedMedications: string[];
-}
 
 export { BookingSchema, IBookingDocument };

@@ -1,13 +1,21 @@
 import { Schema, Document } from 'mongoose';
 
-const UserSchema = new Schema(({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-}));
+enum ROLE_TYPES {
+  CUSTOMER_CARE = 'CUSTOMER_CARE',
+  GROWTH = 'GROWTH',
+  SCIENCE_DATA = 'SCIENCE_DATA',
+}
 
 interface IUserDocument extends Document {
   username: string;
   password: string;
+  roles: ROLE_TYPES[];
 }
 
-export { UserSchema, IUserDocument };
+const UserSchema = new Schema(({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  roles: [{ type: String, enum: Object.keys(ROLE_TYPES) }],
+}));
+
+export { IUserDocument, UserSchema, ROLE_TYPES };

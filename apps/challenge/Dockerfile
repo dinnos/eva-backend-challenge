@@ -4,13 +4,13 @@ FROM node:12-alpine as builder
 LABEL name="EVA - Backend Challenge"
 LABEL maintainer="Vladimir Salvador <alonsovla@gmail.com>"
 
-# Creates an app foderl and copy the code
+# Creates an app folder and copy the code
 WORKDIR /app
 COPY . .
 
 # Clean node cache
 RUN npm cache clean --force && \
-    # Install dependencias
+    # Install dependencies
     npm install             && \
     # Build production artifacts ("/dist" folder)
     npm run build

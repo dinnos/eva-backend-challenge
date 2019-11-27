@@ -3,7 +3,7 @@
 Requirements (software)
 * docker v19.03.4
 * docker-compose v1.24.1
-* node min version v4.X.X
+* node min version v10.X.X
 
 Technologies Stack
 * Node v12 provide by docker

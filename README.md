@@ -1,9 +1,16 @@
 # Eva Backend Challenge
 
 Requirements (software)
-* docker
-* docker-compose
-* node
+* docker v19.03.4
+* docker-compose v1.24.1
+* node min version v4.X.X
+
+Technologies Stack
+* Node v12 provide by docker
+* Nestjs v6.10.5
+    * Typescript 3.7
+    * Json Web Token (JWT)
+* Mongodb v4.2
 
 Setup
 ```
@@ -17,41 +24,79 @@ Testing
 docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 ```
 
-Available endpoints
-
-* POST /auth/login
-* GET /bookings/consumed-medications 
-
-Imagine it's your first day at Eva and you are fresh out of the onboarding process.
-You've been assigned to the Backend team that will support the exploration experience at our Eva Centers in shopping malls.
-
-Women book explorations through our website.
-On the date of their exploration women visit the center, answer some questions about their health, and are scanned by our thermal cameras.
-We recommend you watch this [video](https://youtu.be/12h-0qUdJag) for more context on the experience.
-
-Back to work, you log into the issue tracker and find that you've already been assigned the following ticket:
-
+Folder structure
 ```
-ISSUE 01
-
-The Science & Data team has detected a large correlation between consumed medications and breast cancer.
-They've requested a new endpoint that will allow them to query explorations based on the consumed medications that were reported in the survey.
-
-REQUIREMENTS
-
-* Time based filtering, the team only wants to query a specific time frame at a time.
-* Clinic filtering, the team only wants to query a specific clinic at a time.
-* Filter by consumed medications STRICT MODE, the team wants to find out which explorations match ALL of the medications specified.
-* Filter by consumed medications LAX MODE, the team wants to find out which explorations match ANY of the medications specified.
+/
+|---.envs
+|---apps
+|   |---challenge
+|       |---src
+|       |   |---auth
+|       |   |   |---decorators
+|       |   |   |---guards
+|       |   |   |---interfaces
+|       |   |   |---schemas
+|       |   |   |---strategies
+|       |   |---booking
+|       |   |   |---dto
+|       |   |   |---schemas
+|       |   |---shared
+|       |       |---decorators
+|       |       |---dto
+|       |       |---interfaces
+|       |       |---utils
+|       |       |---validators
+|       |---test
+|---seeder
+|   |---src
+|       |---seeds
+|       |---utils
+|   docker-compose.override.yml
+|   docker-compose.test.yml
+|   docker-composee.yml
 ```
 
-## Your mission, should you choose to accept it
+- .envs  
+Contains all the environment files required for the docker-compose services
+    - .db.env  
+       username and password required for mongodb image
+    -  backend.env  
+       set mongo default database and mongo uri required for app service (Docker)
+- apps 
+Contain a folder for each development app, all the apps contains his single Dockerfile
+    - challenge app  
+      REST API to serve the explorations resources 
+      - src contains the source code of the API divided into modules
+        - Auth module
+          Serves the auth resource with the following endpoints the strategies folder contains files with particular implementations of [passport](http://www.passportjs.org/) strategies (auth) 
+          POST /auth/login  handle the user authentication in base a Passport local strategy (username, password)
+        - Booking module 
+          Code related with the bookings - explorations resource
+          GET /booking/consumed-medications (need Authentication/Authorization)
+        - Shared module  
+          Contains libs, classes, etc, that are useful or need for all other modules 
+      - test folder with all the e2e tests of the API
+- seeder  
+Node script that fills the database with default information
+    - seeds folder
+      contains a json file for each database collection 
+    - utils  
+      Group of libraries that transform and read the json files of the seed folder so that they are provided to the entry point of the script (index.js)
+- docker-compose files
+    - docker-compose.yml File that contains the default services configuration for all environments
+    - docker-compose.override.yml Overrides the services for development env
+    - docker-compose.test.tml Overrides the services for test env
+    
+schemas folders  
+Files that declare the mongodb document of the module
 
-- Clone this repo and create a repo of your own (DO NOT FORK THIS REPO).
-- Seed a database of your choice with the provided explorations.
-- Implement an API REST written in NodeJS with a framework of your choice that implements the required endpoint.
-- Your api endpoint should be documented.
-- Your api endpoint should be tested.
-- Your api endpoint should not be public (Authentication).
-- No other team (Customer Care, Growth, etc) should not be able to access the Science & Data endpoint (Roles/Authorization).
-- It should be easy for your teammates to understand your repo and use your code in the unfortunate case of your sudden combustion.
+guards folders
+Handler interceptors that validates conditions to give access to particular resource (endpoint)
+
+dto folders
+Classes that works like payloads for the resources (endpoints) if the body or an other part of the request didn't meet the required attributes of the class throws an 400 error
+ 
+decorators folders
+Provides custom decorator to inject attributes into the handlers
+
+

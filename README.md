@@ -19,6 +19,24 @@ cd seeder
 npm start
 ```
 
+Once you run the setup commands you will have access to the api  
+In order to use it you will need to get a token by making a POST request to localhost:3000/auth/login with the following example {username: "science_data", password: "science_data"} now the next requests need to setup a Authorization Header with the following value "Bearer ${token receive from /auth/login}".  
+The get the consumed-medications perform a GET request to localhost:3000/booking/consumed-medications this request needs the next payload: 
+```
+{
+   period: {
+      start: Date
+      end?: Date (Optional)
+   },
+   
+   clinicName: string,
+   
+   isStrict: boolean,
+   
+   consumedMedications: string[]
+}
+
+
 Testing
 ```
 docker-compose -f docker-compose.yml -f docker-compose.test.yml up

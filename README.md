@@ -25,8 +25,8 @@ The get the consumed-medications perform a GET request to localhost:3000/booking
 ```
 {
    period: {
-      start: Date
-      end?: Date (Optional)
+      start: Date,
+      end?: Date, // (Optional)
    },
    
    clinicName: string,
@@ -35,7 +35,7 @@ The get the consumed-medications perform a GET request to localhost:3000/booking
    
    consumedMedications: string[]
 }
-
+```
 
 Testing
 ```
